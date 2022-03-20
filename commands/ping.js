@@ -5,7 +5,7 @@ const { MessageEmbed } = require("discord.js")
 module.exports = {
   aliases: ["latency"],
   description: "am I alive?",
-  args: None,
+  args: null,
   hidden: true,
   slash: "both",
   test: true, 
@@ -14,11 +14,12 @@ module.exports = {
     .setTitle('I\'m alive')
     .setColor(client.colour)
     .setDescription(`Latency is **${interaction? Date.now() - interaction.createdTimestamp :Date.now() - message.createdTimestamp}ms.**`)
-    
-    if (message){
-      await message.reply({embeds: [embed]})
+
+    if (interaction) {
+      interaction.reply({embeds: [embed]}); 
     } else {
-      await interaction.reply({embeds: [embed]})
+      message.reply({embeds: [embed]});
     }
+
   }
 }

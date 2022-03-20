@@ -32,7 +32,7 @@ client.on("ready", () => {
     // remembering each command
     const command = require(`./commands/${file}`);
 
-    if (!command.hasOwnProperty("description") || !command.hasOwnProperty("slash")) throw Error("jeez at least tell me the description and the slash command info! o(≧口≦)o")
+    if (!command.hasOwnProperty("description") || !command.hasOwnProperty("slash")) throw Error("jeez at least tell me the description and the slash command info! o(≧口≦)o");
 
     client.commands.set(file.replace(".js", ""), command);
 
@@ -85,8 +85,11 @@ client.on("messageCreate", async (message) => {
   if(!message.content.startsWith(client.prefix))return
   const command = message.content.split(" ").shift().replace(client.prefix, "")
 
+  const content = message.content.split(" ").slice(1);
+
   if (client.commands.has(command)){
-    client.commands.get(command).callback({message: message, content: message.content, client: client})
+    client.commands.get(command).callback({message: message, content: content, client: client}) 
+    
   }
 })
 
